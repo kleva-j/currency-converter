@@ -1,0 +1,26 @@
+{
+  "name": "currency-converter",
+  "version": "1.0.0",
+  "description": "a currency converter app",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kleva-j/currency-converter.git"
+  },
+  "keywords": [
+    "currency",
+    "converter"
+  ],
+  "author": "Michael",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kleva-j/currency-converter/issues"
+  },
+  "homepage": "https://github.com/kleva-j/currency-converter#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
