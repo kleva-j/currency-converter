@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: basic;
+  border-radius: 2px;
+}
+
+body{
+  font-size: 20px;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+header{
+  text-align: center;
+  padding: 10px;
+}
+
+a{
+  color: black;
+  text-decoration: none;
+}
+
+.controller{
+  height: 200px;
+}
+
+.display-tab{
+  height: 100px;
+  width: 85%;
+  margin: 15px auto;
+  border: 1px solid black
+}
+
+section{
+  border: 1px solid black;
+  margin: 0 auto;
+  width: 320px;
+  text-align: center;
+}
+
+select, input{
+  width: 85%;
+  border: none;
+  border: 1px solid black;
+  margin: 5px auto;
+  padding: 3.5px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+select:hover, input:hover{
+  background: rgba(220,220,220,.2)
+}
+
+#submit{
+  font-size: 1.3rem;
+  background: black;
+  color: white;
+  padding: .3em;
+  width: 85%;
+  border: none;
+  border: 1px solid black;
+  margin-top: 1em;
+  border-radius: .7em;
+  cursor: pointer;
+}
+
+#submit:hover{
+  background: rgba(0,0,0,.8);
+  border-color: rgba(0,0,0,.8);
+}
