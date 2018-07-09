@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: basic;
+  border-radius: 2px;
 }
 
 body{
@@ -21,7 +22,7 @@ header{
 a{
   color: black;
   text-decoration: none;
-}  
+}
 
 .controller{
   height: 200px;
