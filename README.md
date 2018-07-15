@@ -13,3 +13,5 @@ An app that let you convert different one currency to another using the most rec
 ## License $ copyright
 
 © Michael A Obasi.
+
+Licensed under the [MIT License](LICENSE).
