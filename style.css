@@ -3,15 +3,15 @@
   padding: 0;
   box-sizing: border-box;
   font-family: basic;
-  border-radius: 2px;
 }
 
 body{
   font-size: 20px;
 }
 
-h1 {
-  font-size: 2rem;
+h2 {
+  font-size: 1.5rem;
+  padding: .5em 0;
 }
 
 header{
@@ -24,19 +24,23 @@ a{
   text-decoration: none;
 }
 
-.controller{
-  height: 200px;
+.display-tab{
+  padding-top: 10px;
+  height: 80px;
+  width: 88%;
+  margin: auto;
 }
 
-.display-tab{
-  height: 100px;
-  width: 85%;
-  margin: 15px auto;
-  border: 1px solid black
+p{
+  text-align: start;
+  font-size: .8rem;
+  margin: 1em 1.8em 0;
+  padding: 0;
 }
+
 
 section{
-  border: 1px solid black;
+  box-shadow: 0 0 3px 1px rgba(0,0,0,.5);
   margin: 0 auto;
   width: 320px;
   text-align: center;
@@ -45,31 +49,34 @@ section{
 select, input{
   width: 85%;
   border: none;
-  border: 1px solid black;
-  margin: 5px auto;
-  padding: 3.5px;
-  border-radius: 2px;
+  border-bottom: 1px solid black;
   cursor: pointer;
 }
 
-select:hover, input:hover{
+input{
+  font-size: .8rem;
+  padding: .8em 0;
+  margin-top: .8em;
+}
+
+input:hover{
   background: rgba(220,220,220,.2)
 }
 
 #submit{
-  font-size: 1.3rem;
-  background: black;
+  font-size: 1.2rem;
+  background: green;
   color: white;
   padding: .3em;
-  width: 85%;
+  width: 86%;
   border: none;
-  border: 1px solid black;
-  margin-top: 1em;
-  border-radius: .7em;
+  margin: 1em 0;
+  border-radius: .2em;
   cursor: pointer;
+  box-shadow: 0 0 .5px .5px rgba(0,0,0,.5);
 }
 
 #submit:hover{
-  background: rgba(0,0,0,.8);
-  border-color: rgba(0,0,0,.8);
+  background: rgba(0,128,0,.8);
+  box-shadow: 0 0 2px 1px rgba(0,0,0,.9);
 }
