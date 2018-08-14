@@ -35,7 +35,6 @@ p{
   text-align: start;
   font-size: .8rem;
   margin: .9em 1.8em 0;
-  padding: 0;
 }
 
 
@@ -73,10 +72,10 @@ input:hover{
   margin: 1em 0;
   border-radius: .2em;
   cursor: pointer;
-  box-shadow: 0 0 .5px .5px rgba(0,0,0,.5);
+  box-shadow: 0 0 2px 1px rgba(0,0,0,.9);
 }
 
 #submit:hover{
+  box-shadow: 0 0 .5px .5px rgba(0,0,0,.5);
   background: rgba(0,128,0,.8);
-  box-shadow: 0 0 2px 1px rgba(0,0,0,.9);
 }
