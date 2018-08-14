@@ -1,19 +1,19 @@
 let cacheName = 'v2';
 
-let cacheFiles = [
-  './',
-  './index.html',
-  './style.css',
-  './js/main.js'
-]
-
 self.addEventListener('install', (e) => {
-  console.log('[serviceWorker] installed')
+  console.log('[serviceWorker] Installed')
 
   e.waitUntil(
     caches.open(cacheName).then((cache) => {
-      console.log('caching cacheFiles')
-      return cache.addAll(cacheFiles);
+      console.log('caching cacheFiles');
+      // console.log(cache)
+      return cache.addAll([
+        './',
+        './index.html',
+        './style.css',
+        './js/main.js',
+        './api/v1/currencies'
+      ]);
     })
   );
 
