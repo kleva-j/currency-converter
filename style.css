@@ -35,31 +35,40 @@ p{
   text-align: start;
   font-size: .8rem;
   margin: .9em 1.8em 0;
+  padding: 1em;
 }
 
 
 section{
-  box-shadow: 0 0 3px 1px rgba(0,0,0,.5);
+  /* box-shadow: 0 0 3px 1px rgba(0,0,0,.5); */
   margin: 0 auto;
-  width: 320px;
+  width: 420px;
   text-align: center;
+}
+
+select{
+  padding: 10px
 }
 
 select, input{
   width: 85%;
   border: none;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid grey;
   cursor: pointer;
+  background: transparent
 }
 
 input{
   font-size: .8rem;
-  padding: .8em 0;
-  margin-top: .8em;
+  margin: 2em
 }
 
 input:hover{
   background: rgba(220,220,220,.2)
+}
+
+input[type='number']{
+  padding: 10px;
 }
 
 #submit{
