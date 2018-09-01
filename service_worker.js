@@ -11,7 +11,7 @@ self.addEventListener('install', (e) => {
         './',
         './index.html',
         './style.css',
-        './js/main.js',
+        './dist/js/main.js',
         './api/v1/currencies'
       ]);
     })
@@ -46,27 +46,41 @@ self.addEventListener('fetch', (e) => {
         return response;
       }
 
-      let requestClone = e.request.clone()
+      let requestClone = e.request.clone();
+
+      // async function fetchData() {
+      //   try {
+      //     let response = await (await fetch(requestClone)).json();
+      //     let responseClone = response.clone();
+      //     caches.open(cacheName).then((cache) => {
+      //       cache.put(e.request, responseClone);
+      //       return response;
+      //     })
+      //   }
+      //   catch(err) {
+      //     console.log('No response gotten from fetch');
+      //     console.error(err);
+      //   }
+      //   if(!response) return response;
+      // };
+
+      // return (fetchData());
 
       fetch(requestClone)
         .then((response) => {
-
-            if (!response) {
-              console.log(`[Service Worker] No response from fetch`);
-              return response;
-            }
-
-            let responseClone = response.clone();
-
-            caches.open(cacheName).then((cache) => {
-              cache.put(e.request, responseClone)
-              return response;
-            })
-      })
-      .catch(err => {
-        console.log(`[Service Worker] Error Fetching New Data. ${err}`)
-      });
-
+          if (!response) {
+            console.log(`[Service Worker] No response from fetch`);
+            return response;
+          }
+          let responseClone = response.clone();
+          caches.open(cacheName).then((cache) => {
+            cache.put(e.request, responseClone)
+            return response;
+          });
+        })
+        .catch(err => {
+          console.log(`[Service Worker] Error Fetching New Data. ${err}`);
+        });
     })
   );
 

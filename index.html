@@ -22,18 +22,20 @@
           <h4 id="display">PLEASE SELECT THE CURRENCIES TO BE CONVERTED</h4>
         </div>
         <div class="controller">
-          <p>From</p>
-          <select name="from" id="select-from"></select>
-          <p>To</p>
-          <select name="to" id="select-to"></select>
-          <input type="number" placeholder="Amount">
-          <button id="submit">convert</button>
+          <form>
+            <p>From</p>
+            <select name="from" id="select-from"></select>
+            <p>To</p>
+            <select name="to" id="select-to"></select>
+            <input type="number" id="number" placeholder="Amount">          
+            <input type="submit" id="submit" value="convert">
+          </form>
         </div>
       </section>
 
     </div>
 
-    <script src="js/main.js"></script>
+    <script src="dist/js/main.js"></script>
   </body>
 
 </html>
