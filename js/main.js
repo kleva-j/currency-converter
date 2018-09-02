@@ -6,11 +6,9 @@ const controller = {
     this.regServiceWorker();    
   },
 
-  fetchConvRate(from, to) {
-    // let rate = await fetch(`https://free.currencyconverterapi.com/api/v6/convert?q=${from}_${to}&compact=ultra`);
-    
-    // return (await rate.json());
-    return 360;
+  async fetchConvRate(from, to) {
+    const result = await ( await fetch(`https://free.currencyconverterapi.com/api/v6/convert?q=${from}_${to}&compact=ultra`)).json();
+    return result[`${from}_${to}`];
   },
 
   async fetchOptions() {
@@ -21,19 +19,18 @@ const controller = {
 
   async convert(from, to, input, db) {
     const DB = await db;
-    this.fetchFromDB(from, to, DB)
-    .then(rate => {
-      const results = this.calculateConversion(input, rate);
-      if (rate) {        
-        console.log(input, results);
-        return views.render({from, to, input, results});
-      }
-      const newRate = this.fetchConvRate(from, to);
-      views.render({from, to, input, results});     
-      return this.saveToDB(from, to, newRate, DB);             
-    })
-    .then(_ => console.log(`Added ${from}-${to} to the database`))
-    .catch(err => console.log(err));
+    let results;
+    const dbFetch = await this.fetchFromDB(from, to, DB);
+    if(dbFetch) {
+      results = this.calculateConversion(input, dbFetch);
+      return views.render({from, to, input, results})
+    }
+    else {
+      const rate = await this.fetchConvRate(from, to);
+      results = this.calculateConversion(input, rate);
+      await this.saveToDB(from, to, rate, DB);
+      return views.render({from, to, input, results});  
+    }
   },
 
   async fetchFromDB(from, to, db) {
@@ -42,7 +39,7 @@ const controller = {
     return store.get(`${from}-${to}`);
   },
   
-  async saveToDB(from, to, amount, db) { 
+  async saveToDB(from, to, amount, db) {
     const tx = await db.transaction('conversion','readwrite');
     const store = await tx.objectStore('conversion');
     store.put(amount,`${from}-${to}`);

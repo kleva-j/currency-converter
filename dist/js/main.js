@@ -325,11 +325,9 @@ const controller = {
     this.regServiceWorker();
   },
 
-  fetchConvRate(from, to) {
-    // let rate = await fetch(`https://free.currencyconverterapi.com/api/v6/convert?q=${from}_${to}&compact=ultra`);
-
-    // return (await rate.json());
-    return 360;
+  async fetchConvRate(from, to) {
+    const result = await (await fetch(`https://free.currencyconverterapi.com/api/v6/convert?q=${from}_${to}&compact=ultra`)).json();
+    return result[`${from}_${to}`];
   },
 
   async fetchOptions() {
@@ -338,18 +336,35 @@ const controller = {
     return jsonData.message;
   },
 
+  // async convert(from, to, input, db) {
+  //   const DB = await db;
+  //   this.fetchFromDB(from, to, DB)
+  //   .then(rate => {
+  //     const results = this.calculateConversion(input, rate);
+  //     if (rate) return views.render({from, to, input, results});
+  //     const newRate = await (await this.fetchConvRate(from, to)).json();
+  //     console.log(newRate);
+  //     const newResults = this.calculateConversion(input, rate);
+  //     views.render({from, to, input, newResults});     
+  //     return this.saveToDB(from, to, newRate, DB);             
+  //   })
+  //   .then(_ => console.log(`Added ${from}-${to} to the database`))
+  //   .catch(err => console.log(err));
+  // },
+
   async convert(from, to, input, db) {
     const DB = await db;
-    this.fetchFromDB(from, to, DB).then(rate => {
-      const results = this.calculateConversion(input, rate);
-      if (rate) {
-        console.log(input, results);
-        return views.render({ from, to, input, results });
-      }
-      const newRate = this.fetchConvRate(from, to);
-      views.render({ from, to, input, results });
-      return this.saveToDB(from, to, newRate, DB);
-    }).then(_ => console.log(`Added ${from}-${to} to the database`)).catch(err => console.log(err));
+    let results;
+    const dbFetch = await this.fetchFromDB(from, to, DB);
+    if (dbFetch) {
+      results = this.calculateConversion(input, dbFetch);
+      return views.render({ from, to, input, results });
+    } else {
+      const rate = await this.fetchConvRate(from, to);
+      results = this.calculateConversion(input, rate);
+      await this.saveToDB(from, to, rate, DB);
+      return views.render({ from, to, input, results });
+    }
   },
 
   async fetchFromDB(from, to, db) {
