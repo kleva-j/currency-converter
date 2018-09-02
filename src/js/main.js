@@ -82,7 +82,8 @@ const views = {
       e.preventDefault();
       const number = document.querySelector('#number').value;
       const amount = number ? parseInt(number) : 0;
-      controller.convert(this.from.value, this.to.value, amount, DB);
+      controller.convert(this.from.value, this.to.value, amount, DB)
+        .catch(err) { console.lo(err) };
     };
     this.renderOptions();
   },
