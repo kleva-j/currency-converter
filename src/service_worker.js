@@ -79,7 +79,7 @@ self.addEventListener('fetch', (e) => {
           });
         })
         .catch(err => {
-          console.log(`[Service Worker] Error Fetching New Data. ${err}`);
+          console.log(`[Service Worker] Error Fetching New Data.`);
         });
     })
   );

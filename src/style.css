@@ -9,6 +9,10 @@ body{
   font-size: 20px;
 }
 
+.container{
+  position: relative;
+}
+
 h2 {
   font-size: 1.5rem;
   padding: .5em 0;
@@ -87,4 +91,61 @@ input[type='number']{
 #submit:hover{
   box-shadow: 0 0 .5px .5px rgba(0,0,0,.5);
   background: rgba(0,128,0,.8);
+}
+
+.alert{
+  position: absolute;
+  display: none;
+  background-color: rgba(0,0,0,.64);
+  height: 100vh;
+  top: 0;
+  width: 100%;
+}
+
+.show{
+  display: block;
+}
+
+.load{
+  width: 100px;
+  height: 100px;
+  margin: 300px auto;
+  display: block;
+  border-radius: 50%;
+  border: 7px;
+  animation: spin 1s infinite linear;
+  border-left: solid lightblue;
+  border-right: solid lightblue;
+  border-top: solid transparent;
+  border-bottom: solid transparent;
+}
+
+@keyframes spin{
+  0% {transform: rotate(0deg)}
+  100% {transform: rotate(360deg)}
+}
+
+.errmsg{
+  padding: 0; 
+  box-sizing: border-box;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  border-top: 3px solid lightblue;
+  margin: 200px auto;
+  border-radius: 2px;
+  background: white;
+}
+
+.errmsg p, #reload{
+  font-size: 17px;
+  padding: 0;
+  margin: 8px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.errmsg #reload{
+  margin: 5px auto;
+  padding: 2px 3px;
 }

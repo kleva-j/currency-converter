@@ -326,8 +326,14 @@ const controller = {
   },
 
   async fetchConvRate(from, to) {
-    const result = await (await fetch(`https://free.currencyconverterapi.com/api/v6/convert?q=${from}_${to}&compact=ultra`)).json();
-    return result[`${from}_${to}`];
+    try {
+      const fetchRate = await fetch(`https://free.currencyconverterapi.com/api/v6/convert?q=${from}_${to}&compact=ultra`);
+      const results = await fetchRate.json();
+      return result[`${from}_${to}`];
+    } catch (err) {
+      console.log(err);
+      return;
+    }
   },
 
   async fetchOptions() {
@@ -335,22 +341,6 @@ const controller = {
     let jsonData = await data.json();
     return jsonData.message;
   },
-
-  // async convert(from, to, input, db) {
-  //   const DB = await db;
-  //   this.fetchFromDB(from, to, DB)
-  //   .then(rate => {
-  //     const results = this.calculateConversion(input, rate);
-  //     if (rate) return views.render({from, to, input, results});
-  //     const newRate = await (await this.fetchConvRate(from, to)).json();
-  //     console.log(newRate);
-  //     const newResults = this.calculateConversion(input, rate);
-  //     views.render({from, to, input, newResults});     
-  //     return this.saveToDB(from, to, newRate, DB);             
-  //   })
-  //   .then(_ => console.log(`Added ${from}-${to} to the database`))
-  //   .catch(err => console.log(err));
-  // },
 
   async convert(from, to, input, db) {
     const DB = await db;
@@ -361,9 +351,12 @@ const controller = {
       return views.render({ from, to, input, results });
     } else {
       const rate = await this.fetchConvRate(from, to);
-      results = this.calculateConversion(input, rate);
-      await this.saveToDB(from, to, rate, DB);
-      return views.render({ from, to, input, results });
+      if (rate) {
+        console.log(rate);
+        results = this.calculateConversion(input, rate);
+        await this.saveToDB(from, to, rate, DB).catch(console);
+        return views.render({ from, to, input, results });
+      } else return views.renderError();
     }
   },
 
@@ -403,6 +396,7 @@ const views = {
   init() {
     this.display = document.querySelector('#display');
     const select = document.querySelectorAll('select');
+    this.alertbox = document.querySelector('.alert');
     this.from = select[0];
     this.to = select[1];
     const form = document.querySelector('form');
@@ -411,9 +405,10 @@ const views = {
 
     form.onsubmit = e => {
       e.preventDefault();
+      this.renderLoader('add');
       const number = document.querySelector('#number').value;
       const amount = number ? parseInt(number) : 0;
-      controller.convert(this.from.value, this.to.value, amount, DB);
+      controller.convert(this.from.value, this.to.value, amount, DB).catch(console.log);
     };
     this.renderOptions();
   },
@@ -429,9 +424,28 @@ const views = {
     }
   },
 
+  renderLoader(str) {
+    if (str == 'add') {
+      this.alertbox.classList.add('show');
+      this.alertbox.innerHTML = `<span></span>`;
+      document.querySelector('span').classList.add('load');
+    } else if (str == 'remove') this.alertbox.classList.remove('show');
+  },
+
+  renderError() {
+    const remove = () => this.renderLoader('remove');
+    this.alertbox.innerHTML = `<div class="errmsg">
+                                <p>Oops, something went wrong</p>
+                                <button id="reload">Try again</button>  
+                              </div>`;
+    document.querySelector('#reload').addEventListener('click', remove);
+  },
+
   render(data) {
+    this.renderLoader('remove');
     const { from, to, input, results } = data;
     if (results == 0) this.display.textContent = 'Please let be serious here';else this.display.textContent = `${input} ${from} = ${results} ${to}`;
+    this.renderLoader();
   }
 };
 
