@@ -10,7 +10,7 @@ An app that let you convert different one currency to another using the most rec
 
 - Michael A Obasi <kasmickleva@gmail.com>
 
-## License $ copyright
+## License & Copyright
 
 © Michael A Obasi.
 
