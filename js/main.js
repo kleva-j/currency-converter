@@ -6,36 +6,39 @@ const controller = {
     this.regServiceWorker();    
   },
 
-  async fetchConvRate(from, to) {
+  async fetchFromNetwork(from, to) {
     try {
       const fetchRate = await fetch(`https://free.currencyconverterapi.com/api/v6/convert?q=${from}_${to}&compact=ultra`);
       const results = await fetchRate.json();
-      return result[`${from}_${to}`];
+      return results[`${from}_${to}`];
     }
     catch(err) {
       console.log(err);
       return;
-    }
+    } 
   },
 
   async fetchOptions() {
     let data = await fetch('http://localhost:8080/api/v1/currencies');
     let jsonData = await data.json();
     return jsonData.message;
-  },
+  }, 
 
   async convert(from, to, input, db) {
     const DB = await db;
     let results;
+    if(from == to) {
+      results = input;
+      return views.render({from, to, input, results});
+    }
     const dbFetch = await this.fetchFromDB(from, to, DB);
     if(dbFetch) {
       results = this.calculateConversion(input, dbFetch);
-      return views.render({from, to, input, results})
+      return views.render({from, to, input, results});
     }
     else {
-      const rate = await this.fetchConvRate(from, to);
+      const rate = await this.fetchFromNetwork(from, to);
       if(rate) {
-        console.log(rate);
         results = this.calculateConversion(input, rate);
         await this.saveToDB(from, to, rate, DB).catch(console);
         return views.render({from, to, input, results});  
@@ -89,12 +92,12 @@ const views = {
     const form = document.querySelector('form');
 
     const DB = controller.createIDBDatabase();
-    
+     
     form.onsubmit = e => {
       e.preventDefault();
       this.renderLoader('add');
       const number = document.querySelector('#number').value;
-      const amount = number ? parseInt(number) : 0;
+      const amount = number ? parseInt(number) : 1;
       controller.convert(this.from.value, this.to.value, amount, DB).catch(console.log);      
     };
     this.renderOptions();
@@ -118,7 +121,7 @@ const views = {
   renderLoader(str){
     if(str == 'add') {
       this.alertbox.classList.add('show');
-      this.alertbox.innerHTML = `<span></span>`;
+      this.alertbox.innerHTML = `<span></span>`; 
       document.querySelector('span').classList.add('load');
     }
     else if (str == 'remove') this.alertbox.classList.remove('show');
