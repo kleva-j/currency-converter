@@ -19,9 +19,9 @@ const controller = {
   },
 
   async fetchOptions() {
-    let data = await fetch('http://localhost:8080/api/v1/currencies');
+    let data = await fetch('https://free.currencyconverterapi.com/api/v5/currencies');
     let jsonData = await data.json();
-    return jsonData.message;
+    return (Object.values(jsonData.results));
   }, 
 
   async convert(from, to, input, db) {

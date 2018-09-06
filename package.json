@@ -26,7 +26,6 @@
   "bugs": {
     "url": "https://github.com/kleva-j/currency-converter/issues"
   },
-  "homepage": "https://github.com/kleva-j/currency-converter#readme",
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",

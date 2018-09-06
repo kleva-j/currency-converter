@@ -12,7 +12,7 @@ self.addEventListener('install', (e) => {
         './index.html',
         './style.css',
         './dist/js/main.js',
-        './api/v1/currencies'
+        `https://free.currencyconverterapi.com/api/v5/currencies`
       ]);
     })
   );
