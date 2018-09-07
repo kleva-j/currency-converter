@@ -4,8 +4,6 @@
   "description": "A currency converter app",
   "main": "app.js",
   "scripts": {
-    "test": "mocha",
-    "start": "nodemon app.js",
     "build": "babel src/js -d src/dist/js && browserify src/dist/js/main.js -o src/dist/js/main.js",
     "clean": "rm -r src/dist",
     "clean-build": "npm run clean && npm run build"
