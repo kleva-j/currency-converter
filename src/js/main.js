@@ -50,7 +50,7 @@ const controller = {
   async fetchFromDB(from, to, db) {
     const tx = db.transaction('conversion');
     const store = tx.objectStore('conversion');
-    return store.get(`${from}-${to}`);
+    return store.get(`${to}-${from}`) || store.get(`${from}-${to}`);
   },
   
   async saveToDB(from, to, amount, db) {
@@ -119,12 +119,14 @@ const views = {
   },
 
   renderLoader(str){
-    if(str == 'add') {
+    if (str == 'add') {
       this.alertbox.classList.add('show');
       this.alertbox.innerHTML = `<span></span>`; 
       document.querySelector('span').classList.add('load');
     }
-    else if (str == 'remove') this.alertbox.classList.remove('show');
+    else if (str == 'remove') {
+      this.alertbox.classList.remove('show');
+    }
   },
 
   renderError(){
@@ -139,8 +141,8 @@ const views = {
   render(data) {
     this.renderLoader('remove');
     const {from, to, input, results} = data;
-    if(results == 0) this.display.textContent = 'Please let be serious here';
-    else this.display.textContent = `${input} ${from} = ${results} ${to}`;    
+    if(results == 0 || !from || !to) this.display.textContent = 'Please let be serious here';
+    else this.display.textContent = `${input} ${from} = ${results} ${to}`;
     this.renderLoader();
   }
 }
