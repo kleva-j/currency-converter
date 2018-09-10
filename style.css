@@ -15,12 +15,12 @@ body{
 
 h2 {
   font-size: 1.5rem;
-  padding: .5em 0;
+  padding: 1em 0;
 }
 
 header{
   text-align: center;
-  padding: 10px;
+  background: rgba(30, 143, 255, 0.808);
 }
 
 a{
@@ -29,25 +29,29 @@ a{
 }
 
 .display-tab{
-  padding-top: 10px;
-  height: 80px;
-  width: 88%;
-  margin: auto;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#display{
+  font-size: 1rem
 }
 
 p{
   text-align: start;
   font-size: .8rem;
   margin: .9em 1.8em 0;
-  padding: 1em;
+  padding: 1em 0;
 }
 
 
 section{
-  /* box-shadow: 0 0 3px 1px rgba(0,0,0,.5); */
   margin: 0 auto;
   width: 420px;
   text-align: center;
+  padding: 20px 0;
 }
 
 select{
@@ -55,7 +59,7 @@ select{
 }
 
 select, input{
-  width: 85%;
+  width: 90%;
   border: none;
   border-bottom: 1px solid grey;
   cursor: pointer;
@@ -64,33 +68,32 @@ select, input{
 
 input{
   font-size: .8rem;
-  margin: 2em
+  margin: 2.7em 0;
 }
 
-input:hover{
-  background: rgba(220,220,220,.2)
+input:focus{
+  background: rgba(220,220,220,.2);
 }
 
 input[type='number']{
-  padding: 10px;
+  padding: 10px 10px;
 }
 
 #submit{
   font-size: 1.2rem;
-  background: green;
+  background: rgba(30, 143, 255, 0.808);
   color: white;
   padding: .3em;
-  width: 86%;
   border: none;
   margin: 1em 0;
   border-radius: .2em;
   cursor: pointer;
-  box-shadow: 0 0 2px 1px rgba(0,0,0,.9);
+  box-shadow: 0 1px 1px 1px rgba(0,0,0,.6);
 }
 
 #submit:hover{
-  box-shadow: 0 0 .5px .5px rgba(0,0,0,.5);
-  background: rgba(0,128,0,.8);
+  background: dodgerblue;
+  box-shadow: 0 0 1px 1px rgba(0,0,0,.9);
 }
 
 .alert{
@@ -131,7 +134,7 @@ input[type='number']{
   width: 200px;
   display: flex;
   flex-direction: column;
-  border-top: 3px solid lightblue;
+  border-top: 3px solid rgba(30, 143, 255, 0.808);
   margin: 200px auto;
   border-radius: 2px;
   background: white;
@@ -147,5 +150,13 @@ input[type='number']{
 
 .errmsg #reload{
   margin: 5px auto;
+  background: rgba(30, 143, 255, 0.808);
   padding: 2px 3px;
+}
+
+@media (max-width: 576px) {
+  section{
+    width: 100%;
+  }
+  
 }
