@@ -97,7 +97,7 @@ input[type='number']{
 }
 
 .alert{
-  position: absolute;
+  position: fixed;
   display: none;
   background-color: rgba(0,0,0,.64);
   height: 100vh;
