@@ -132,7 +132,7 @@ const views = {
   renderError(){
     const remove = () => this.renderLoader('remove');
     this.alertbox.innerHTML =`<div class="errmsg">
-                                <p>Oops, something went wrong</p>
+                                <p>Oops, something went wrong. Please check your internet connection</p>
                                 <button id="reload">Try again</button>  
                               </div>`;
     document.querySelector('#reload').addEventListener('click', remove);
