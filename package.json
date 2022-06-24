@@ -32,8 +32,8 @@
     "browserify": "^16.5.2",
     "express": "^4.17.1",
     "idb": "^2.1.3",
-    "nodemon": "^2.0.7",
-    "snyk": "^1.437.4"
+    "nodemon": "^2.0.17",
+    "snyk": "^1.680.0"
   },
   "snyk": true
 }
